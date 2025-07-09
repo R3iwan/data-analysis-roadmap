@@ -1,19 +1,27 @@
 text = input("Введите текст для анализа:\n")
 
-# 1. Считаем символы
+# --- Старая функциональность ---
 char_count = len(text)
 print(f"Общее количество символов: {char_count}")
 
-# 2. Считаем слова
-# .split() создает список из слов
 word_list = text.split()
-word_count = len(word_list)
-print(f"Количество слов: {word_count}")
+total_word_count = len(word_list) 
+print(f"Общее количество слов: {total_word_count}")
 
-# 3. Считаем предложения
-# .count() считает, сколько раз символ встречается в строке
 sentence_count = text.count('.') + text.count('!') + text.count('?')
-# Проверка на случай, если текст не пустой, но знаков препинания нет
 if sentence_count == 0 and char_count > 0:
     sentence_count = 1
 print(f"Количество предложений: {sentence_count}")
+
+# --- Новая функциональность ---
+unique_words = []
+for word in word_list:
+    cleaned_word = word.lower().strip(".,!?:;")
+    if cleaned_word not in unique_words and cleaned_word != '':
+        unique_words.append(cleaned_word)
+
+unique_words.sort()
+
+print("-" * 20)
+print(f"Количество уникальных слов: {len(unique_words)}")
+print(f"Уникальные слова: {unique_words}")
